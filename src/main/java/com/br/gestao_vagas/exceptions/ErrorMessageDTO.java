@@ -1,4 +1,4 @@
-package com.br.gestao_vagas.candidate.exceptions;
+package com.br.gestao_vagas.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
