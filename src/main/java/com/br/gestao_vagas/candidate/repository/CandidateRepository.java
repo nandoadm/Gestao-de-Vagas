@@ -1,5 +1,6 @@
-package com.br.gestao_vagas.candidate;
+package com.br.gestao_vagas.candidate.repository;
 
+import com.br.gestao_vagas.candidate.entity.CandidateEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

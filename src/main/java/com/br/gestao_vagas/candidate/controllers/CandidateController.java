@@ -1,11 +1,10 @@
-package com.br.gestao_vagas.candidate;
+package com.br.gestao_vagas.candidate.controllers;
 
+import com.br.gestao_vagas.candidate.entity.CandidateEntity;
 import com.br.gestao_vagas.candidate.useCases.CreateCandidateUseCase;
-import com.br.gestao_vagas.exceptions.UserFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
