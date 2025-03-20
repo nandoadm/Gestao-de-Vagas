@@ -1,6 +1,6 @@
 package com.br.gestao_vagas.company.useCase;
 
-import com.br.gestao_vagas.company.CompanyRepository;
+import com.br.gestao_vagas.company.repository.CompanyRepository;
 import com.br.gestao_vagas.company.entity.CompanyEntity;
 import com.br.gestao_vagas.exceptions.UserFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

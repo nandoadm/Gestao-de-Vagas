@@ -1,7 +1,6 @@
-package com.br.gestao_vagas.company;
+package com.br.gestao_vagas.company.repository;
 
 import com.br.gestao_vagas.company.entity.CompanyEntity;
-import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
