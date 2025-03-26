@@ -6,6 +6,7 @@ import com.br.gestao_vagas.company.useCase.CreateCompanyUseCase;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,8 @@ public class CompanyController {
 
     @Autowired
     private CreateCompanyUseCase createCompanyUseCase;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @PostMapping("/")
     //Valid - verifica as requisições do vindas da CompanyEntity
