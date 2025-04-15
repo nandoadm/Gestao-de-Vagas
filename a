@@ -1,0 +1,115 @@
+[33mcommit ec2b5bdea28c1a8909ff3e05620d16a5c2430827[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: admnando <nando.comth@gmail.com>
+Date:   Sat Mar 29 08:08:00 2025 -0300
+
+    Classe securityFilter
+    Filtro de segurança para Rotas e Requisições.
+
+[33mcommit 879261d6bacd122e1da394691b943f8e8afb5bc6[m
+Author: admnando <nando.comth@gmail.com>
+Date:   Wed Mar 26 17:27:04 2025 -0300
+
+    Validando Usuario úValidação, Comparação de senhas, Criptografia, configuração do secretKey
+
+[33mcommit 87c3c16e47d1e8d99662dbbb812313e0cd855912[m
+Author: admnando <nando.comth@gmail.com>
+Date:   Wed Mar 26 11:00:33 2025 -0300
+
+    Inserindo codificação no password(Alteração de Entidades)
+
+[33mcommit 36161ba39b2e2733a3da1d223d80c10a5def2f38[m
+Author: admnando <nando.comth@gmail.com>
+Date:   Tue Mar 25 16:47:19 2025 -0300
+
+    configuração de rotas
+
+[33mcommit bc2a2fd1d904043ec702e891e9858124f8b9903d[m
+Author: admnando <nando.comth@gmail.com>
+Date:   Mon Mar 24 15:05:20 2025 -0300
+
+    Configurando e o Security e desabilitando o csrf
+
+[33mcommit ae90f839a9e91a82fefdb16c497180585fb24c03[m
+Author: admnando <nando.comth@gmail.com>
+Date:   Fri Mar 21 20:50:37 2025 -0300
+
+    Alterações na JobEntity, Criaçaão JobController, JobRepository, CreateJobUseCase
+
+[33mcommit 6c52e02703702963ee9dbb3158b0dd2836e2c099[m
+Author: admnando <nando.comth@gmail.com>
+Date:   Thu Mar 20 17:19:31 2025 -0300
+
+    Criação da classe CompanyController
+
+[33mcommit 952754c700abc88b0d7bd39b74999320ea45a3cb[m
+Author: admnando <nando.comth@gmail.com>
+Date:   Thu Mar 20 17:10:05 2025 -0300
+
+    Criação da classe
+     CompanyUseCase
+
+[33mcommit 5a380fffd67717a7fe7a8c756b22c802ff747349[m
+Author: admnando <nando.comth@gmail.com>
+Date:   Thu Mar 20 16:36:08 2025 -0300
+
+    Criação das Entidades  e relacionamento da tabela Company/Job
+
+[33mcommit c54a0a29b82d63dee7dcc8e577fc0bf63ea0ea76[m
+Author: admnando <nando.comth@gmail.com>
+Date:   Wed Mar 19 11:41:21 2025 -0300
+
+    Reorganização de pastas(candidate)
+
+[33mcommit 7fd8bfefaacdc5d343c8e8343b110aa828cb8ef9[m
+Author: admnando <nando.comth@gmail.com>
+Date:   Tue Mar 18 21:38:10 2025 -0300
+
+    Refatoração Controller para UseCase e resoluçaão de erro Db
+
+[33mcommit 78f035f9f4543497cd5b74592c561b0fce30b357[m
+Author: admnando <nando.comth@gmail.com>
+Date:   Tue Mar 18 21:12:48 2025 -0300
+
+    Validando usuario ja existente
+
+[33mcommit 8ff61e12ddde80e4386f1885d6326d41db0f7149[m
+Author: admnando <nando.comth@gmail.com>
+Date:   Tue Mar 18 15:08:36 2025 -0300
+
+    Inserindo repositorio
+
+[33mcommit 9b37b480b8a712b7d71eeee18137c6549711d29c[m
+Author: admnando <nando.comth@gmail.com>
+Date:   Tue Mar 18 13:39:04 2025 -0300
+
+    Configuração JPA e PostgreSQL
+
+[33mcommit 79137ac6ceaf4620d2a263027a9e5d7a188a97b2[m
+Author: admnando <nando.comth@gmail.com>
+Date:   Tue Mar 18 10:07:45 2025 -0300
+
+    Formatando mensagem de erro para o usuario
+
+[33mcommit da0d14dc97763fdc187aa75771c85f4d8a9858e3[m
+Author: admnando <nando.comth@gmail.com>
+Date:   Mon Mar 17 19:43:33 2025 -0300
+
+    Regex password
+
+[33mcommit 6ef00b7094e276ee8bf63cac6350259c352386ab[m
+Author: admnando <nando.comth@gmail.com>
+Date:   Mon Mar 17 16:22:14 2025 -0300
+
+    Inserindo validações  de usuario
+
+[33mcommit bb5101298b1fcf19d28883e368e812d4163afe10[m
+Author: admnando <nando.comth@gmail.com>
+Date:   Mon Mar 17 11:49:49 2025 -0300
+
+    Configuração do swagger-openai
+
+[33mcommit bfa0b50a0fef90501a16eb9e7e6e42260f2e12b8[m
+Author: admnando <nando.comth@gmail.com>
+Date:   Mon Mar 10 17:34:27 2025 -0300
+
+    Subindo Repositorio
