@@ -18,7 +18,8 @@ public class SecurityConfig {
     private final String[] authorities = {
             "/candidate/",
             "/company/",
-            "/auth/company"
+            "/auth/company",
+            "/candidate/auth",
     };
     @Autowired
     private SecurityFilter securityFilter;
