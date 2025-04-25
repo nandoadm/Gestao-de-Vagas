@@ -1,6 +1,7 @@
 package com.br.gestao_vagas.security;
 
 
+import com.br.gestao_vagas.candidate.security.SecurityCandidateFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,17 +25,24 @@ public class SecurityConfig {
     @Autowired
     private SecurityFilter securityFilter;
 
+    @Autowired
+    private SecurityCandidateFilter securityCandidateFilter;
+
     //Bean - Utilizado para sobrescrever as configurações de um método
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
+        http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> {
                     //authorities -> lista com rotas públicas
                     auth.requestMatchers(authorities).permitAll()
+
                             .anyRequest().authenticated();
                     //para qualquer  outra rota é necessario authenticação
                 })
+
+                .addFilterBefore(securityCandidateFilter, BasicAuthenticationFilter.class)
                 .addFilterBefore(securityFilter, BasicAuthenticationFilter.class);
+
         return http.build();
     }
 
