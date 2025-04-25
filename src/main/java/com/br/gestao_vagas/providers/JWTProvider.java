@@ -24,6 +24,7 @@ public class JWTProvider {
             return subject;
         } catch (JWTVerificationException ex) {
             ex.printStackTrace();
+            System.out.println(ex.getMessage());
             return "";
         }
     }

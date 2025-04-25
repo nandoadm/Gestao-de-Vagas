@@ -14,6 +14,7 @@ import javax.naming.AuthenticationException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class AuthCandidateUseCase {
@@ -30,14 +31,17 @@ public class AuthCandidateUseCase {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public AuthCandidateResponseDTO execute(AuthCandidateRequestDTO authCandidateRequestDTO) throws AuthenticationException {
+    public AuthCandidateResponseDTO execute(AuthCandidateRequestDTO authCandidateRequestDTO)
+            throws AuthenticationException {
         var candidate = this.candidateRepository.findByUsername(authCandidateRequestDTO.username())
                 .orElseThrow(
                         () -> {
                             throw new UsernameNotFoundException("Username/Password incorreto");
                         });
 
-        var passwordMatch = passwordEncoder.matches(authCandidateRequestDTO.password(), candidate.getPassword());
+        var passwordMatch = passwordEncoder
+                .matches(authCandidateRequestDTO.password(), candidate.getPassword());
+
         if (!passwordMatch) {
             throw new AuthenticationException();
         }
@@ -48,7 +52,7 @@ public class AuthCandidateUseCase {
         var token = JWT.create()
                 .withIssuer("javagas")
                 .withSubject(candidate.getId().toString())
-                .withClaim("roles", Arrays.asList("candidate"))
+                .withClaim("roles", List.of("candidate"))
                 .withExpiresAt(Instant.now().plus(Duration.ofMinutes(10)))
                 .sign(algorithm);
 

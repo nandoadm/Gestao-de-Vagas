@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/candidate")
+@RequestMapping("/auth")
 public class AuthCandidateController {
 
     private final AuthCandidateUseCase authCandidateUseCase;
@@ -21,7 +21,7 @@ public class AuthCandidateController {
         this.authCandidateUseCase = authCandidateUseCase;
     }
 
-    @PostMapping("/auth")
+    @PostMapping("/candidate")
     public ResponseEntity<Object> auth(@RequestBody AuthCandidateRequestDTO authCandidateRequestDTO) {
         try{
             var token = this.authCandidateUseCase.execute(authCandidateRequestDTO);

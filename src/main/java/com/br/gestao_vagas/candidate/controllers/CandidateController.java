@@ -2,13 +2,14 @@ package com.br.gestao_vagas.candidate.controllers;
 
 import com.br.gestao_vagas.candidate.entity.CandidateEntity;
 import com.br.gestao_vagas.candidate.useCases.CreateCandidateUseCase;
+import com.br.gestao_vagas.candidate.useCases.ProfilecandidateUseCase;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 /*
 RequestBody é utilizado para enviar requisições
 Valid é utilizado para validação. Ex: Validar Regex do CandidateEntity
@@ -23,6 +24,9 @@ public class CandidateController {
     @Autowired
     private CreateCandidateUseCase createCandidateUseCase;
 
+    @Autowired
+    private ProfilecandidateUseCase profilecandidateUseCase;
+
     @PostMapping("/")
     public ResponseEntity<Object> create(@Valid @RequestBody CandidateEntity candidateEntity) {
 
@@ -36,4 +40,18 @@ public class CandidateController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @GetMapping("/")
+    public ResponseEntity<Object> get(HttpServletRequest request) {
+        var idCandidate = request.getAttribute("candidate_id");
+        try {
+            var profile = this.profilecandidateUseCase
+                    .execute(UUID.fromString(idCandidate.toString()));
+            return ResponseEntity.ok().body(profile);
+        } catch (Exception e) {
+            //Retorna um badRequest(400) com a mensagem de erro
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
+

@@ -19,7 +19,7 @@ public class SecurityConfig {
             "/candidate/",
             "/company/",
             "/auth/company",
-            "/candidate/auth",
+            "/auth/candidate",
     };
     @Autowired
     private SecurityFilter securityFilter;
