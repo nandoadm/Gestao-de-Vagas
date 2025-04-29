@@ -22,7 +22,6 @@ public class SecurityConfig {
             "/company/",
             "/company/auth",
             "/candidate/auth",
-            "/job/"
     };
     private final SecurityFilter securityFilter;
 
