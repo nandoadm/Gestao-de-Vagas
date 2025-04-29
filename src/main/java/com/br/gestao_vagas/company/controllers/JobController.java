@@ -6,7 +6,6 @@ import com.br.gestao_vagas.company.entity.JobEntity;
 import com.br.gestao_vagas.company.useCase.CreateJobUseCase;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +17,11 @@ import java.util.UUID;
 @RequestMapping("/job")
 public class JobController {
 
-    @Autowired
-    private CreateJobUseCase createJobUseCase;
+    private final CreateJobUseCase createJobUseCase;
+
+    public JobController(CreateJobUseCase createJobUseCase) {
+        this.createJobUseCase = createJobUseCase;
+    }
 
     @PostMapping("/")
     public JobEntity create(@Valid @RequestBody CreateJobDTO createJobDTO, HttpServletRequest request) {
@@ -33,6 +35,6 @@ public class JobController {
                 .description(createJobDTO.getDescription())
                 .build();
 
-       return this.createJobUseCase.execute(jobEntity);
+        return this.createJobUseCase.execute(jobEntity);
     }
 }

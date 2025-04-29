@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/company")
 public class AuthCompanyController {
 
     private final AuthCompanyUseCase authCompanyUseCase;
@@ -20,7 +20,7 @@ public class AuthCompanyController {
         this.authCompanyUseCase = authCompanyUseCase;
     }
 
-    @PostMapping("/company")
+    @PostMapping("/auth")
     public ResponseEntity<Object> create(@RequestBody AuthCompanyDTO authCompanyDTO) {
 
         try {

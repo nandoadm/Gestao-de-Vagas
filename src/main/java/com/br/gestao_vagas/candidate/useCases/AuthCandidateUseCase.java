@@ -50,7 +50,7 @@ public class AuthCandidateUseCase {
         var token = JWT.create()
                 .withIssuer("javagas")
                 .withSubject(candidate.getId().toString())
-                .withClaim("roles", List.of("candidate"))
+                    .withClaim("roles", List.of("CANDIDATE"))
                 .withExpiresAt(Instant.now().plus(Duration.ofMinutes(10)))
                 .sign(algorithm);
 
