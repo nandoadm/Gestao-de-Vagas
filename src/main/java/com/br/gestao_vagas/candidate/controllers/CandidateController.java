@@ -2,7 +2,17 @@ package com.br.gestao_vagas.candidate.controllers;
 
 import com.br.gestao_vagas.candidate.entity.CandidateEntity;
 import com.br.gestao_vagas.candidate.useCases.CreateCandidateUseCase;
+import com.br.gestao_vagas.candidate.useCases.ListAllJobsByFilterUseCase;
 import com.br.gestao_vagas.candidate.useCases.ProfilecandidateUseCase;
+import com.br.gestao_vagas.company.entity.JobEntity;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 /*
 RequestBody é utilizado para enviar requisições
@@ -27,6 +38,9 @@ public class CandidateController {
 
     @Autowired
     private ProfilecandidateUseCase profilecandidateUseCase;
+
+    @Autowired
+    private ListAllJobsByFilterUseCase listAllJobsByFilterUseCase;
 
     @PostMapping("/")
     public ResponseEntity<Object> create(@Valid @RequestBody CandidateEntity candidateEntity) {
@@ -55,5 +69,24 @@ public class CandidateController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @GetMapping("/job")
+    @PreAuthorize("hasRole('CANDIDATE')")
+    @Tag(name = "Candidato", description = "Informações do Candidato")
+    @Operation(summary = "Listagem de vagas disponivel para cadidato",
+    description = "Lista de vagas")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", content = {
+                    @Content(
+                        array = @ArraySchema(schema = @Schema(implementation = JobEntity.class))
+                    )
+            })
+    })
+    @SecurityRequirement(name = "jwt_auth")
+    public List<JobEntity> findJobByFilter(@RequestParam String filter){
+        return this.listAllJobsByFilterUseCase.execute(filter);
+    }
+
 }
+
 

@@ -17,12 +17,21 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 public class SecurityConfig {
 
     //Lista com rotas públicas
-    private final String[] authorities = {
+    private static final String[] authorities = {
             "/candidate/",
             "/company/",
             "/company/auth",
             "/candidate/auth",
     };
+
+    private static final String[] SWAGGER_LIST = {
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/swagger-resources/**",
+            "/swagger-ui.html",
+            "/webjars/**"
+    };
+
     private final SecurityFilter securityFilter;
 
     private final SecurityCandidateFilter securityCandidateFilter;
@@ -39,7 +48,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> {
                     //authorities -> lista com rotas públicas
                     auth.requestMatchers(authorities).permitAll()
-
+                            .requestMatchers(SWAGGER_LIST).permitAll()
                             .anyRequest().authenticated();
                     //para qualquer  outra rota é necessario authenticação
                 })
