@@ -1,5 +1,6 @@
 package com.br.gestao_vagas.candidate.controllers;
 
+import com.br.gestao_vagas.candidate.dto.ProfileCandidateResponseDTO;
 import com.br.gestao_vagas.candidate.entity.CandidateEntity;
 import com.br.gestao_vagas.candidate.useCases.CreateCandidateUseCase;
 import com.br.gestao_vagas.candidate.useCases.ListAllJobsByFilterUseCase;
@@ -58,6 +59,18 @@ public class CandidateController {
 
     @PreAuthorize("hasRole('CANDIDATE')")
     @GetMapping("/")
+    @Tag(name = "Candidato", description = "Retornar candidato")
+    @Operation(summary = "Perfil do candidato",
+            description = "Essa funçao é responsavel por buscar as informçoes do Candidato")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", content = {
+                    @Content(
+                            schema = @Schema(implementation = ProfileCandidateResponseDTO.class)
+                    )
+            })
+    })
+    @ApiResponse(responseCode = "400",description = "User not found")
+    @SecurityRequirement(name = "jwt_auth")
     public ResponseEntity<Object> get(HttpServletRequest request) {
         var idCandidate = request.getAttribute("candidate_id");
         try {
@@ -74,7 +87,7 @@ public class CandidateController {
     @PreAuthorize("hasRole('CANDIDATE')")
     @Tag(name = "Candidato", description = "Informações do Candidato")
     @Operation(summary = "Listagem de vagas disponivel para cadidato",
-    description = "Lista de vagas")
+    description = "Essa função é responsavel por listar os candidatos")
     @ApiResponses({
             @ApiResponse(responseCode = "200", content = {
                     @Content(

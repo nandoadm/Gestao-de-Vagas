@@ -1,6 +1,7 @@
 package com.br.gestao_vagas.company.entity;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,8 +32,12 @@ public class JobEntity {
     @CreationTimestamp
     private LocalDateTime createdDate;
 
+    @Schema(example = "Full Stack Developer")
     private String description;
+    @Schema(example = "Junior, Pleno, Senior")
     private String level;
+
     private String curriculum;
+    @Schema(example = "GymPass, plano de saude")
     private String benefits;
 }
