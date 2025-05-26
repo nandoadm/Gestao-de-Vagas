@@ -2,6 +2,7 @@ package com.br.gestao_vagas.candidate.controllers;
 
 import com.br.gestao_vagas.candidate.dto.ProfileCandidateResponseDTO;
 import com.br.gestao_vagas.candidate.entity.CandidateEntity;
+import com.br.gestao_vagas.candidate.useCases.ApplyJobCandidateUseCase;
 import com.br.gestao_vagas.candidate.useCases.CreateCandidateUseCase;
 import com.br.gestao_vagas.candidate.useCases.ListAllJobsByFilterUseCase;
 import com.br.gestao_vagas.candidate.useCases.ProfilecandidateUseCase;
@@ -43,6 +44,9 @@ public class CandidateController {
 
     @Autowired
     private ListAllJobsByFilterUseCase listAllJobsByFilterUseCase;
+
+    @Autowired
+    private ApplyJobCandidateUseCase applyJobCandidateUseCase;
 
     @PostMapping("/")
     @Operation(summary = "Cadastro do candidato",
@@ -107,6 +111,24 @@ public class CandidateController {
     @SecurityRequirement(name = "jwt_auth")
     public List<JobEntity> findJobByFilter(@RequestParam String filter) {
         return this.listAllJobsByFilterUseCase.execute(filter);
+    }
+
+
+    @PostMapping("/job/apply")
+    @PreAuthorize("hasRole('CANDIDATE')")
+    @SecurityRequirement(name = "jwt_auth")
+    @Operation(summary = "Inscrição do candidato para uma vaga",
+            description = "Esta função é responsavel por realizar a inscrição do candidato a uma vaga")
+    public ResponseEntity<Object> applyJob(HttpServletRequest request, @RequestBody UUID idJob) {
+        var idCandidate = request.getAttribute("candidate_id");
+
+        try {
+            var result = this.applyJobCandidateUseCase.execute(UUID.fromString(idCandidate.toString()), idJob);
+            return ResponseEntity.ok().body(result);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+
+        }
     }
 
 }

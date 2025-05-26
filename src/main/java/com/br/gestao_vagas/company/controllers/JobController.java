@@ -5,7 +5,6 @@ import com.br.gestao_vagas.company.dto.CreateJobDTO;
 import com.br.gestao_vagas.company.entity.JobEntity;
 import com.br.gestao_vagas.company.useCase.CreateJobUseCase;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -14,6 +13,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,17 +45,23 @@ public class JobController {
             })
     })
     @SecurityRequirement(name = "jwt_auth")
-    public JobEntity create(@Valid @RequestBody CreateJobDTO createJobDTO, HttpServletRequest request) {
+    public ResponseEntity<Object> create(@Valid @RequestBody CreateJobDTO createJobDTO, HttpServletRequest request) {
         var companyId = request.getAttribute("company_id");
 
+        try {
 
-        var jobEntity = JobEntity.builder()
-                .benefits(createJobDTO.getBenefits())
-                .companyId(UUID.fromString(companyId.toString()))
-                .level(createJobDTO.getLevel())
-                .description(createJobDTO.getDescription())
-                .build();
+            var jobEntity = JobEntity.builder()
+                    .benefits(createJobDTO.getBenefits())
+                    .companyId(UUID.fromString(companyId.toString()))
+                    .level(createJobDTO.getLevel())
+                    .description(createJobDTO.getDescription())
+                    .build();
 
-        return this.createJobUseCase.execute(jobEntity);
+            var result =  this.createJobUseCase.execute(jobEntity);
+            return ResponseEntity.ok().body(result);
+
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

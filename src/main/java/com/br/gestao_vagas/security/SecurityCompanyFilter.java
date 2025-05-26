@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Collections;
 
 /*O filtro é resposável por toda a requisição antes de chegar na controller.
     Authenticação -> Jwt
@@ -29,7 +28,7 @@ import java.util.Collections;
 
 @Component
 //OncePerRequestFilter -> Garante que o filtro sera executado uma vez por requisição
-public class SecurityFilter extends OncePerRequestFilter {
+public class SecurityCompanyFilter extends OncePerRequestFilter {
     @Value("${security.token.secret}")
     private String secretToken;
 

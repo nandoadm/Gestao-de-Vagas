@@ -1,10 +1,11 @@
 package com.br.gestao_vagas.candidate.useCases;
 
+import com.br.gestao_vagas.candidate.entity.ApplyJobEntity;
+import com.br.gestao_vagas.candidate.repository.ApplyJobRepository;
 import com.br.gestao_vagas.candidate.repository.CandidateRepository;
 import com.br.gestao_vagas.company.repository.JobRespository;
 import com.br.gestao_vagas.exceptions.JobNotFoundExeption;
 import com.br.gestao_vagas.exceptions.UserNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -12,21 +13,35 @@ import java.util.UUID;
 @Service
 public class ApplyJobCandidateUseCase {
 
-    @Autowired
-    private JobRespository jobRespository;
+    private final JobRespository jobRespository;
 
-    @Autowired
-    private CandidateRepository candidateRepository;
+    private final CandidateRepository candidateRepository;
 
-    public void execute(UUID idCandidate, UUID idJob) {
+    private final ApplyJobRepository applyJobRepository;
 
-        var candidateId = this.candidateRepository.findById(idCandidate).orElseThrow(() -> {
+    public ApplyJobCandidateUseCase(JobRespository jobRespository, CandidateRepository candidateRepository, ApplyJobRepository applyJobRepository) {
+        this.jobRespository = jobRespository;
+        this.candidateRepository = candidateRepository;
+        this.applyJobRepository = applyJobRepository;
+    }
+
+    public ApplyJobEntity execute(UUID idCandidate, UUID idJob) {
+
+        this.candidateRepository.findById(idCandidate).orElseThrow(() -> {
             throw new UserNotFoundException();
         });
 
-        var JobId = this.jobRespository.findById(idJob).orElseThrow(() -> {
+        this.jobRespository.findById(idJob).orElseThrow(() -> {
             throw new JobNotFoundExeption();
         });
+
+        var applyJob = ApplyJobEntity.builder()
+                .jobId(idJob)
+                .candidateId(idCandidate)
+                .build();
+
+        applyJob = this.applyJobRepository.save(applyJob);
+        return applyJob;
 
 
     }

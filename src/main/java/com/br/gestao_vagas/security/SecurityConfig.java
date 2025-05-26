@@ -32,12 +32,16 @@ public class SecurityConfig {
             "/webjars/**"
     };
 
-    private final SecurityFilter securityFilter;
+    private static final String[] actuator = {
+            "/actuator/**"
+    };
+
+    private final SecurityCompanyFilter securityCompanyFilter;
 
     private final SecurityCandidateFilter securityCandidateFilter;
 
-    public SecurityConfig(SecurityFilter securityFilter, SecurityCandidateFilter securityCandidateFilter) {
-        this.securityFilter = securityFilter;
+    public SecurityConfig(SecurityCompanyFilter securityCompanyFilter, SecurityCandidateFilter securityCandidateFilter) {
+        this.securityCompanyFilter = securityCompanyFilter;
         this.securityCandidateFilter = securityCandidateFilter;
     }
 
@@ -49,12 +53,13 @@ public class SecurityConfig {
                     //authorities -> lista com rotas públicas
                     auth.requestMatchers(authorities).permitAll()
                             .requestMatchers(SWAGGER_LIST).permitAll()
+                            .requestMatchers(actuator).permitAll()
                             .anyRequest().authenticated();
                     //para qualquer  outra rota é necessario authenticação
                 })
 
                 .addFilterBefore(securityCandidateFilter, BasicAuthenticationFilter.class)
-                .addFilterBefore(securityFilter, BasicAuthenticationFilter.class);
+                .addFilterBefore(securityCompanyFilter, BasicAuthenticationFilter.class);
 
         return http.build();
     }
